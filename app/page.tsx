@@ -2,303 +2,546 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FileText, User, Wrench } from "lucide-react";
-import { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  Briefcase,
+  CheckCircle2,
+  Clock3,
+  FileText,
+  GraduationCap,
+  Image as ImageIcon,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Printer,
+  ShieldCheck,
+  Star,
+} from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import HeroCarousel from "@/components/HeroCarousel";
 
-const testimonials = [
+const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+const CALL_NUMBER = "+91 XXXXX XXXXX";
+
+const services = [
   {
-    name: "Rahul Sharma",
-    text: "Bahut fast service mili, form bina error ke fill ho gaya.",
+    title: "सरकारी नौकरी Forms",
+    desc: "SSC, Railway, Police, Army, Banking, Teaching aur sabhi Govt Job forms bharwaye.",
+    icon: Briefcase,
   },
   {
-    name: "Pooja Verma",
-    text: "Resume banwaya tha, job mil gayi 🙌",
+    title: "Admit Card / Result",
+    desc: "Admit card download, result check, exam notification aur print service.",
+    icon: FileText,
   },
   {
-    name: "Amit Kumar",
-    text: "PDF work perfect tha, highly recommended.",
+    title: "Scholarship Forms",
+    desc: "School, college, government scholarship forms carefully fill kiye jaate hain.",
+    icon: GraduationCap,
+  },
+  {
+    title: "Resume / Bio Data",
+    desc: "Job ke liye professional resume, CV aur bio-data Hindi/English me banwaye.",
+    icon: Printer,
+  },
+  {
+    title: "PDF / Photo Work",
+    desc: "PDF merge, compress, scan, photo resize, signature resize aur document editing.",
+    icon: ImageIcon,
+  },
+  {
+    title: "Typing & Online Work",
+    desc: "Hindi/English typing, letter, application, affidavit format aur online work.",
+    icon: CheckCircle2,
   },
 ];
 
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
+const photos = [
+  "/images/cyber/service1.jpeg",
+  "/images/cyber/service2.jpeg",
+  "/images/cyber/service3.jpeg",
+  "/images/cyber/service4.jpeg",
+];
 
-const item = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  show: { opacity: 1, y: 0, scale: 1 },
-};
+const steps = [
+  "WhatsApp par documents bhejo",
+  "Hum details confirm karenge",
+  "Form fill hone ke baad verify karwaenge",
+  "Final submit ke baad receipt/admit card bhej denge",
+];
 
 export default function Home() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % testimonials.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=Namaste%20mujhe%20online%20form%20bharwana%20hai`;
 
   return (
-    <main className="bg-gradient-to-b from-white via-blue-50 to-white text-gray-900">
+    <main className="min-h-screen bg-[#f8fafc] text-slate-900 antialiased">
+      {/* Top Bar */}
+      <div className="bg-indigo-950 text-sm text-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-2.5 md:flex-row md:items-center md:justify-between">
+          <p className="font-medium text-white/90">
+            क्या आप परेशान हैं? घर बैठे Online Form, Admit Card, Result, Resume aur PDF ka kaam
+          </p>
+          <div className="flex flex-wrap gap-4 text-white/90">
+            <span className="flex items-center gap-1.5">
+              <Phone size={15} /> {CALL_NUMBER}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Clock3 size={15} /> 10:00 AM - 8:00 PM
+            </span>
+          </div>
+        </div>
+      </div>
 
-      {/* 🔝 Navbar */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b px-10 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-semibold">
-          CyberCafe<span className="text-blue-600">Pro</span>
-        </h1>
+      {/* Navbar */}
+      <nav className="sticky top-0 z-50 border-b border-indigo-100 bg-white/90 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+          <Link href="/" className="text-2xl font-bold tracking-tight">
+            CyberCafe<span className="text-indigo-700">Pro</span>
+          </Link>
 
-        <div className="flex gap-6 items-center">
-          <Link href="/services">Services</Link>
-          <Link href="/login">Login</Link>
+          <div className="hidden items-center gap-7 text-sm font-medium text-slate-600 md:flex">
+            <a href="#services" className="hover:text-indigo-700">Services</a>
+            <a href="#process" className="hover:text-indigo-700">Kaise Hoga?</a>
+            <a href="#contact" className="hover:text-indigo-700">Contact</a>
+          </div>
+
           <Link
-            href="/upload"
-            className="bg-blue-600 text-white px-5 py-2 rounded-full"
+            href={whatsappLink}
+            target="_blank"
+            className="flex items-center gap-2 rounded-2xl bg-green-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-green-600/20 transition hover:bg-green-700"
           >
-            Get Started
+            <MessageCircle size={18} />
+            WhatsApp
           </Link>
         </div>
       </nav>
 
-      {/* 🚀 Hero */}
-      <section className="relative overflow-hidden py-32 px-6 text-center">
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#dbeafe,transparent_35%),radial-gradient(circle_at_bottom_right,#fde68a,transparent_35%)]" />
 
-  {/* 🔥 Background Gradient Glow */}
-  <div className="absolute inset-0 -z-10">
-    <div className="absolute top-[-100px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-blue-500/20 blur-[120px] rounded-full" />
-    <div className="absolute bottom-[-100px] right-1/2 translate-x-1/2 w-[600px] h-[600px] bg-indigo-500/20 blur-[120px] rounded-full" />
-  </div>
-
-  {/* ✨ Content */}
-  <motion.h2
-    initial={{ opacity: 0, y: 40 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    className="text-5xl md:text-6xl font-bold max-w-4xl mx-auto leading-tight"
-  >
-    Next-Gen Cyber Cafe Services,
-    <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-      {" "}Fast & Seamless
-    </span>
-  </motion.h2>
-
-  <motion.p
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 0.3 }}
-    className="text-gray-600 mt-6 max-w-xl mx-auto text-lg"
-  >
-    Forms, resumes, PDFs — everything handled professionally with speed & accuracy.
-  </motion.p>
-
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 0.5 }}
-    className="mt-10 flex justify-center gap-4"
-  >
-    <Link
-      href="/upload"
-      className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-7 py-3 rounded-full shadow-lg hover:scale-105 transition"
-    >
-      Get Started
-    </Link>
-
-    <Link
-      href="/services"
-      className="border px-7 py-3 rounded-full backdrop-blur-md bg-white/40 hover:bg-white/60 transition"
-    >
-      Explore
-    </Link>
-  </motion.div>
-
-</section>
-
-
-<HeroCarousel />
-
-
-      {/* 🧾 Services */}
-      <AnimatedSection direction="left">
-        <section className="px-10 py-20 max-w-6xl mx-auto overflow-hidden">
-          <h3 className="text-3xl font-semibold text-center mb-12">
-            Our Services
-          </h3>
-
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:py-24">
           <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-3 gap-6"
+            initial={{ opacity: 0, y: 35 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
           >
-            {[1, 2, 3].map((_, i) => (
-              <motion.div
-                key={i}
-                variants={item}
-                whileHover={{ scale: 1.03, y: -4 }}
-                className="p-5 border rounded-2xl shadow-sm bg-white"
-              >
-                {i === 0 && <FileText className="mb-4 text-blue-600" size={32} />}
-                {i === 1 && <User className="mb-4 text-blue-600" size={32} />}
-                {i === 2 && <Wrench className="mb-4 text-blue-600" size={32} />}
+            <div className="mb-5 inline-flex rounded-full border border-indigo-100 bg-white px-4 py-2 text-sm font-semibold text-indigo-700 shadow-sm">
+              ✅ विश्वसनीय Online Cyber Cafe Service
+            </div>
 
-                <h4 className="font-semibold text-lg">
-                  {["Govt Forms", "Resume", "PDF Work"][i]}
-                </h4>
+            <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-slate-950 md:text-6xl">
+              अब Cyber Cafe जाने की जरूरत नहीं,
+              <span className="block text-indigo-700">
+                घर बैठे Form भरवाइए
+              </span>
+            </h1>
 
-                <p className="text-gray-600 text-sm mt-2">
-                  {[
-                    "SSC, Banking forms filling",
-                    "Professional resume building",
-                    "Edit & convert files",
-                  ][i]}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </section>
-      </AnimatedSection>
-
-      {/* ⭐ Features */}
-      <AnimatedSection direction="right">
-        <section className="py-20 px-10 max-w-6xl mx-auto">
-          <h3 className="text-3xl font-semibold text-center mb-12">
-            Why Choose Us
-          </h3>
-
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            {["⚡ Fast", "🔒 Secure", "💰 Affordable"].map((f, i) => (
-              <div key={i} className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition">
-                <h4 className="font-semibold mt-3">{f}</h4>
-                <p className="text-sm text-gray-600 mt-2">
-                  Best service experience
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-      </AnimatedSection>
-
-      {/* ⚡ How it works */}
-      <AnimatedSection direction="left">
-        <section className="bg-gray-50 py-20 px-10">
-          <h3 className="text-3xl font-semibold text-center mb-12">
-            How It Works
-          </h3>
-
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            className="grid md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto"
-          >
-            {["Upload", "Process", "Download"].map((step, i) => (
-              <motion.div key={i} variants={item}>
-                <div className="text-4xl mb-3">
-                  {["📤", "⚙️", "📥"][i]}
-                </div>
-                <h4 className="font-semibold">{step}</h4>
-              </motion.div>
-            ))}
-          </motion.div>
-        </section>
-      </AnimatedSection>
-
-      {/* 💰 Pricing */}
-      <AnimatedSection direction="right">
-        <section className="py-20 px-10 bg-white">
-          <h3 className="text-3xl font-semibold text-center mb-12">
-            Pricing
-          </h3>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {["Basic", "Standard", "Premium"].map((plan, i) => (
-              <div key={i} className="p-6 border rounded-2xl text-center hover:shadow-xl transition">
-                <h4 className="text-xl font-semibold mb-2">{plan}</h4>
-                <p className="text-3xl font-bold mb-4">
-                  ₹{[49, 99, 199][i]}
-                </p>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-full">
-                  Choose Plan
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
-      </AnimatedSection>
-
-      {/* 💬 Testimonials */}
-      <AnimatedSection direction="up">
-        <section className="py-20 text-center">
-          <h3 className="text-3xl font-semibold mb-10">
-            What Users Say
-          </h3>
-
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="max-w-xl mx-auto p-6 border rounded-xl shadow bg-white"
-          >
-            <p className="text-gray-700 italic">
-              "{testimonials[index].text}"
+            <p className="mt-6 max-w-xl text-[17px] font-normal leading-8 text-slate-500">
+              Govt job forms, admit card, result, scholarship, resume, PDF,
+              photo resize aur typing ka kaam simple WhatsApp process se.
+              बस documents भेजिए, बाकी काम हम संभाल लेंगे।
             </p>
-            <h4 className="mt-4 font-semibold">
-              - {testimonials[index].name}
-            </h4>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href={whatsappLink}
+                target="_blank"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-green-600 px-7 py-4 font-semibold text-white shadow-lg shadow-green-600/25 transition hover:-translate-y-1 hover:bg-green-700"
+              >
+                WhatsApp Par Kaam Bhejo
+                <ArrowRight size={19} />
+              </Link>
+
+              <a
+                href={`tel:${CALL_NUMBER}`}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-7 py-4 font-semibold text-slate-800 transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <Phone size={19} />
+                Call Now
+              </a>
+            </div>
+
+            <div className="mt-8 grid max-w-lg grid-cols-3 gap-3">
+              {["Fast Service", "Secure Work", "Hindi Support"].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-white bg-white/80 p-3 text-center text-sm font-semibold text-slate-700 shadow-sm"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 45 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            className="relative"
+          >
+            <div className="absolute -inset-4 rounded-[2rem] bg-indigo-700/20 blur-2xl" />
+            <img
+              src="/images/cyber/hero.jpeg"
+              alt="Online cyber cafe services"
+              className="relative h-[360px] w-full rounded-[2rem] object-cover shadow-xl md:h-[520px]"
+            />
+
+            <div className="absolute bottom-5 left-5 right-5 rounded-[28px] bg-white/90 p-5 shadow-lg backdrop-blur">
+              <div className="flex items-center gap-3">
+                <div className="rounded-2xl bg-indigo-100 p-3 text-indigo-700">
+                  <ShieldCheck />
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900">
+                    100% Verification ke baad submit
+                  </p>
+                  <p className="text-sm leading-6 text-slate-500">
+                    Final submit se pehle details aapse confirm karwaenge.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <AnimatedSection direction="up">
+        <section id="services" className="mx-auto max-w-7xl px-4 py-20">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <p className="mb-3 font-semibold text-orange-600">
+              हमारी सेवाएँ
+            </p>
+            <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+              क्या आप Form भरने में परेशान हैं?
+            </h2>
+            <p className="mt-4 text-[16px] leading-8 text-slate-500">
+              Sabhi online forms aur cyber cafe ka kaam ek jagah. Documents
+              WhatsApp karo, hum receipt / PDF / admit card mobile par bhej denge.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+
+              return (
+                <motion.div
+                  key={service.title}
+                  initial={{
+                    opacity: 0,
+                    x: index % 2 === 0 ? -120 : 120,
+                    y: 40,
+                    scale: 0.9,
+                    rotate: index % 2 === 0 ? -3 : 3,
+                    filter: "blur(14px)",
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    x: 0,
+                    y: 0,
+                    scale: 1,
+                    rotate: 0,
+                    filter: "blur(0px)",
+                  }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className="group rounded-[28px] border border-indigo-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="mb-5 inline-flex rounded-2xl bg-indigo-100 p-4 text-indigo-700 transition group-hover:bg-indigo-700 group-hover:text-white">
+                    <Icon size={30} />
+                  </div>
+                  <h3 className="text-xl font-semibold text-slate-900">
+                    {service.title}
+                  </h3>
+                  <p className="mt-3 leading-8 text-slate-500">
+                    {service.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
         </section>
       </AnimatedSection>
 
-      {/* ❓ FAQ */}
-      <AnimatedSection direction="left">
-        <section className="py-20 px-10 max-w-4xl mx-auto">
-          <h3 className="text-3xl font-semibold text-center mb-10">
-            FAQs
-          </h3>
+      {/* Hindi Tagline Strip */}
+      <section className="bg-indigo-950 px-4 py-12 text-white">
+        <div className="mx-auto max-w-5xl text-center">
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            “आपके दस्तावेज़, हमारी जिम्मेदारी”
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl leading-8 text-white/70">
+            Form bharna, document resize karna, PDF banana ya admit card nikalna —
+            ab sab kuch aasaan, तेज़ और भरोसेमंद तरीके से।
+          </p>
+        </div>
+      </section>
 
-          <div className="space-y-6">
-            <div>
-              <h4 className="font-semibold">How fast is delivery?</h4>
-              <p className="text-gray-600 text-sm">24-48 hours</p>
+      {/* Photo Strip */}
+      {/* Photo Strip */}
+      <AnimatedSection direction="right">
+        <section className="bg-white py-20">
+          <div className="mx-auto max-w-7xl px-4">
+            <div className="mx-auto mb-12 max-w-3xl text-center">
+              <p className="mb-3 font-semibold text-orange-600">
+                हमारी प्रमुख सेवाएँ
+              </p>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+                क्या आप इन कामों के लिए परेशान हैं?
+              </h2>
+              <p className="mt-4 text-[16px] leading-8 text-slate-500">
+                Affidavit, insurance, ration card, electricity meter, bill correction,
+                online form aur सरकारी दस्तावेज़ से जुड़े काम अब आसानी से करवाइए।
+              </p>
             </div>
-            <div>
-              <h4 className="font-semibold">Is my data safe?</h4>
-              <p className="text-gray-600 text-sm">Yes 100% secure</p>
+
+            <div className="grid gap-6 md:grid-cols-4">
+              {photos.map((photo, i) => (
+                <motion.div
+                  key={photo}
+                  initial={{
+                    opacity: 0,
+                    x: 140,
+                    y: 35,
+                    scale: 0.88,
+                    rotate: 4,
+                    filter: "blur(16px)",
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    x: 0,
+                    y: 0,
+                    scale: 1,
+                    rotate: 0,
+                    filter: "blur(0px)",
+                  }}
+                  viewport={{ once: false, amount: 0.25 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: i * 0.12,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="group overflow-hidden rounded-[28px] bg-white shadow-lg shadow-slate-200/80"
+                >
+                  <img
+                    src={photo}
+                    alt={`Cyber cafe service ${i + 1}`}
+                    className="h-60 w-full object-cover transition duration-700 group-hover:scale-110"
+                  />
+                  <div className="p-5">
+                    <h3 className="font-semibold text-slate-900">
+                      {[
+                        "Affidavit / Agreement",
+                        "Vehicle Insurance",
+                        "Ration Card Services",
+                        "Electricity Meter Work",
+                      ][i]}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-500">
+                      {[
+                        "किरायानामा, शपथ पत्र, NOC aur agreement work.",
+                        "Bike, car, commercial vehicle insurance help.",
+                        "नया राशन कार्ड aur नाम जोड़ने से जुड़ा कार्य.",
+                        "मीटर, बिजली बिल, नाम बदलना aur correction work.",
+                      ][i]}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
       </AnimatedSection>
 
-      {/* 🚀 CTA */}
-      <AnimatedSection direction="up">
-        <section className="py-24 text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-          <h3 className="text-4xl font-bold mb-4">
-            Ready to Start? 🚀
-          </h3>
+      {/* Process */}
+      <AnimatedSection direction="left">
+        <section id="process" className="mx-auto max-w-7xl px-4 py-20">
+          <div className="grid gap-12 md:grid-cols-2 md:items-center">
+            <div>
+              <p className="mb-3 font-semibold text-orange-600">
+                काम कैसे होगा?
+              </p>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+                Simple WhatsApp process, no confusion
+              </h2>
+              <p className="mt-5 text-[17px] leading-8 text-slate-500">
+                Aapko website par kuch upload/login nahi karna. Sirf WhatsApp
+                par clear photo/document bhejna hai. Hum details check karke
+                kaam start kar denge.
+              </p>
 
-          <Link
-            href="/upload"
-            className="bg-white text-blue-600 px-8 py-3 rounded-full"
-          >
-            Get Started
-          </Link>
+              <div className="mt-8 space-y-4">
+                {steps.map((step, index) => (
+                  <div
+                    key={step}
+                    className="flex gap-4 rounded-2xl bg-white p-4 shadow-sm"
+                  >
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-700 font-semibold text-white">
+                      {index + 1}
+                    </div>
+                    <p className="font-semibold text-slate-800">{step}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] bg-indigo-950 p-8 text-white shadow-xl">
+              <h3 className="text-3xl font-bold tracking-tight">
+                दस्तावेज़ भेजते समय ध्यान रखें
+              </h3>
+
+              <div className="mt-6 space-y-4 text-white/85">
+                {[
+                  "Photo clear aur readable honi chahiye",
+                  "Name, DOB, mobile number jaise details sahi bhejein",
+                  "Final submit se pehle form check zaroor karein",
+                  "Payment/fees ka confirmation WhatsApp par ho jayega",
+                ].map((point) => (
+                  <div key={point} className="flex gap-3">
+                    <CheckCircle2 className="shrink-0 text-amber-300" />
+                    <p className="leading-7">{point}</p>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href={whatsappLink}
+                target="_blank"
+                className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 font-semibold text-indigo-950 transition hover:bg-amber-100"
+              >
+                WhatsApp Par Documents Bhejo
+                <MessageCircle size={20} />
+              </Link>
+            </div>
+          </div>
         </section>
       </AnimatedSection>
 
-      {/* 🔻 Footer */}
-      <footer className="text-center py-6 text-gray-500 text-sm border-t">
-        © 2026 CyberCafe Pro
-      </footer>
+      {/* Why Choose */}
+      <AnimatedSection direction="right">
+        <section className="bg-orange-50 py-20">
+          <div className="mx-auto max-w-7xl px-4">
+            <div className="mx-auto mb-12 max-w-3xl text-center">
+              <p className="mb-3 font-semibold text-orange-600">
+                भरोसेमंद सेवा
+              </p>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+                Kyun choose karein CyberCafePro?
+              </h2>
+              <p className="mt-4 leading-8 text-slate-500">
+                सही जानकारी, साफ प्रक्रिया और समय पर काम — यही हमारी पहचान है।
+              </p>
+            </div>
 
+            <div className="grid gap-6 md:grid-cols-4">
+              {[
+                ["⚡", "Fast Work", "Time par kaam complete"],
+                ["🔐", "Safe Documents", "Aapka data secure"],
+                ["🇮🇳", "Hindi Support", "Simple language me help"],
+                ["⭐", "Trusted Service", "Verification ke baad submit"],
+              ].map(([emoji, title, desc]) => (
+                <div
+                  key={title}
+                  className="rounded-[28px] bg-white p-6 text-center shadow-sm"
+                >
+                  <div className="text-4xl">{emoji}</div>
+                  <h3 className="mt-4 font-semibold text-slate-900">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-500">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* Testimonials */}
+      <AnimatedSection direction="up">
+        <section className="mx-auto max-w-7xl px-4 py-20">
+          <div className="mb-10 text-center">
+            <p className="mb-3 font-semibold text-orange-600">
+              लोगों का विश्वास
+            </p>
+            <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+              Log kya kehte hain?
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              [
+                "Rahul Sharma",
+                "Railway ka form bharwaya tha, service fast aur clear thi.",
+              ],
+              [
+                "Pooja Verma",
+                "Resume bahut professional bana, WhatsApp par hi PDF mil gayi.",
+              ],
+              [
+                "Amit Kumar",
+                "Admit card download aur print ka kaam turant ho gaya.",
+              ],
+            ].map(([name, text]) => (
+              <div key={name} className="rounded-[28px] bg-white p-6 shadow-sm">
+                <div className="mb-4 flex gap-1 text-yellow-500">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Star key={i} size={18} fill="currentColor" />
+                  ))}
+                </div>
+                <p className="leading-8 text-slate-500">“{text}”</p>
+                <h3 className="mt-5 font-semibold text-slate-900">- {name}</h3>
+              </div>
+            ))}
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* Contact CTA */}
+      <section
+        id="contact"
+        className="relative overflow-hidden bg-gradient-to-r from-indigo-950 via-blue-900 to-slate-950 px-4 py-20 text-white"
+      >
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="mb-4 font-semibold text-amber-300">
+            आज ही संपर्क करें
+          </p>
+          <h2 className="text-4xl font-bold tracking-tight md:text-6xl">
+            Form bharwana hai? Abhi contact karein
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-blue-50/80">
+            Govt job form, admit card, result, scholarship, resume, PDF ya
+            typing — jo bhi cyber cafe work hai, WhatsApp par details bhej do.
+          </p>
+
+          <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
+            <Link
+              href={whatsappLink}
+              target="_blank"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-green-600 px-8 py-4 font-semibold text-white transition hover:bg-green-700"
+            >
+              <MessageCircle size={21} />
+              WhatsApp Now
+            </Link>
+
+            <a
+              href={`tel:${CALL_NUMBER}`}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/40 px-8 py-4 font-semibold text-white transition hover:bg-white/10"
+            >
+              <Phone size={21} />
+              Call: {CALL_NUMBER}
+            </a>
+          </div>
+
+          <div className="mt-8 flex items-center justify-center gap-2 text-blue-50/80">
+            <MapPin size={18} />
+            <span>Online Service Available — India Based Cyber Cafe Help</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-950 px-4 py-8 text-center text-sm text-slate-400">
+        © 2026 CyberCafePro. All Rights Reserved.
+      </footer>
     </main>
   );
 }
