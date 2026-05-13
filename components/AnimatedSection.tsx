@@ -14,26 +14,27 @@ export default function AnimatedSection({
   direction = "up",
   delay = 0,
 }: Props) {
+  const distance = 40;
+
   const variants: Variants = {
     hidden: {
       opacity: 0,
-      x: direction === "left" ? -180 : direction === "right" ? 180 : 0,
-      y: direction === "up" ? 110 : direction === "down" ? -110 : 0,
-      scale: 0.9,
-      rotate: direction === "left" ? -3 : direction === "right" ? 3 : 0,
-      filter: "blur(18px)",
+
+      x:
+        direction === "left" ? -distance : direction === "right" ? distance : 0,
+
+      y: direction === "up" ? distance : direction === "down" ? -distance : 0,
     },
+
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
-      scale: 1,
-      rotate: 0,
-      filter: "blur(0px)",
+
       transition: {
-        duration: 1.35,
+        duration: 0.85,
         delay,
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.22, 1, 0.36, 1],
       },
     },
   };
@@ -43,8 +44,15 @@ export default function AnimatedSection({
       variants={variants}
       initial="hidden"
       whileInView="visible"
-      exit="hidden"
-      viewport={{ once: false, amount: 0.22, margin: "-80px" }}
+      viewport={{
+        once: true,
+        amount: 0.15,
+      }}
+      style={{
+        willChange: "transform, opacity",
+        transform: "translateZ(0)",
+        backfaceVisibility: "hidden",
+      }}
     >
       {children}
     </motion.div>
